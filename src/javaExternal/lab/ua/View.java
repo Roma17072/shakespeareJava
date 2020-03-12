@@ -13,10 +13,11 @@ public class View {
     public void printMessage(String message){
         System.out.println(message);
     }
-    public void printResult (List list){
-      for(int i = 0; i<list.size(); i++){
+    public void printResult (List list) {
+        for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
+        System.out.println(list.size());
     }
 }
 

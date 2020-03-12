@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_shakespeare" default="compile.module.shakespeare">
+  <dirname property="module.shakespeare.basedir" file="${ant.file.module_shakespeare}"/>
+  
+  <property name="module.jdk.home.shakespeare" value="${jdk.home.13}"/>
+  <property name="module.jdk.bin.shakespeare" value="${jdk.bin.13}"/>
+  <property name="module.jdk.classpath.shakespeare" value="jdk.classpath.13"/>
+  
+  <property name="compiler.args.shakespeare" value="-encoding UTF-8 -source 13 -target 13 ${compiler.args}"/>
+  
+  <property name="shakespeare.output.dir" value="${module.shakespeare.basedir}/../production/shakespeare"/>
+  <property name="shakespeare.testoutput.dir" value="${module.shakespeare.basedir}/../test/shakespeare"/>
+  
+  <path id="shakespeare.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="shakespeare.module.production.classpath">
+    <path refid="${module.jdk.classpath.shakespeare}"/>
+  </path>
+  
+  <path id="shakespeare.runtime.production.module.classpath">
+    <pathelement location="${shakespeare.output.dir}"/>
+  </path>
+  
+  <path id="shakespeare.module.classpath">
+    <path refid="${module.jdk.classpath.shakespeare}"/>
+    <pathelement location="${shakespeare.output.dir}"/>
+  </path>
+  
+  <path id="shakespeare.runtime.module.classpath">
+    <pathelement location="${shakespeare.testoutput.dir}"/>
+    <pathelement location="${shakespeare.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.shakespeare">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.shakespeare">
+    <patternset refid="excluded.from.module.shakespeare"/>
+  </patternset>
+  
+  
+  <target name="compile.module.shakespeare" depends="compile.module.shakespeare.production,compile.module.shakespeare.tests" description="Compile module shakespeare"/>
+  
+  <target name="compile.module.shakespeare.production" depends="register.custom.compilers" description="Compile module shakespeare; production classes"/>
+  
+  <target name="compile.module.shakespeare.tests" depends="register.custom.compilers,compile.module.shakespeare.production" description="compile module shakespeare; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.shakespeare" description="cleanup module">
+    <delete dir="${shakespeare.output.dir}"/>
+    <delete dir="${shakespeare.testoutput.dir}"/>
+  </target>
+</project>

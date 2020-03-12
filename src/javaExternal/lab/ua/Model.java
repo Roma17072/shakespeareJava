@@ -76,7 +76,7 @@ public class Model {
         String word= input.toLowerCase();
         Map<String, Integer> result = words.get(word);
         List resultList = new ArrayList(result.entrySet());
-        Collections.sort(resultList, (Comparator<Map.Entry<String, Integer>>) (a, b) ->  b.getValue() - a.getValue() );
+        Collections.sort(resultList, (Comparator<Map.Entry<String, Integer>>) (a, b) ->  b.getValue() - a.getValue());
         return resultList;
     }
 }
