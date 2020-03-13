@@ -1,5 +1,6 @@
 package javaExternal.lab.ua;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,15 +10,15 @@ public class View {
     public static final String TILL= "Till";
     public static final String WRONG= "Wrong input! ";
     public static final String WORD= "Input the word please";
+    public static final String WORD_NOT_FOUND = "Sorry, the word didn't found";
 
     public void printMessage(String message){
         System.out.println(message);
     }
     public void printResult (List list) {
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i< list.size(); i++){
             System.out.println(list.get(i));
         }
-        System.out.println(list.size());
     }
 }
 

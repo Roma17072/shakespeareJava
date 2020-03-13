@@ -14,6 +14,12 @@ public class Model {
 
     Map<String,Map> words = new HashMap<String, Map>();
 
+    List resultList;
+
+    public List getResultList() {
+        return resultList;
+    }
+
     public Model setSonnetFrom(int sonnetFrom) {
         this.sonnetFrom = sonnetFrom;
         return this;
@@ -66,17 +72,20 @@ public class Model {
                 words.put(a, new HashMap<String, Integer>());
                 words.get(a).put(url, 1);
             } else {
-                Integer freq = (Integer) words.get(a).get(url);
-                words.get(a).put(url, (freq == null) ? 1 : ++freq);
+                Integer frequency = (Integer) words.get(a).get(url);
+                words.get(a).put(url, (frequency  == null) ? 1 : frequency++);
             }
         }
     }
 
-    public List searchWord(String input){
+    public boolean searchWord(String input){
         String word= input.toLowerCase();
         Map<String, Integer> result = words.get(word);
-        List resultList = new ArrayList(result.entrySet());
-        Collections.sort(resultList, (Comparator<Map.Entry<String, Integer>>) (a, b) ->  b.getValue() - a.getValue());
-        return resultList;
+        if(result!= null) {
+            resultList= new ArrayList((result.entrySet()));
+            Collections.sort(resultList, (Comparator<Map.Entry<String, Integer>>) (a, b) -> b.getValue() - a.getValue());
+            return true;
+        }
+        return false;
     }
 }

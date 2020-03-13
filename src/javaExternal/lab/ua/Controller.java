@@ -12,7 +12,7 @@ public class Controller {
         this.shakespeareModel = shakespeareModel;
         this.shakespeareView = shakespeareView;
     }
-    public void search () throws Exception {
+    public void searchWord() throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         shakespeareView.printMessage(View.CHOOSE_SONNET);
         shakespeareView.printMessage(View.FROM);
@@ -21,7 +21,11 @@ public class Controller {
         shakespeareModel.setSonnetTill(checkInput(br));
         shakespeareModel.analyze();
         shakespeareView.printMessage(View.WORD);
-        shakespeareView.printResult(shakespeareModel.searchWord(inputString(br)));
+        if(shakespeareModel.searchWord(inputString(br)))
+            shakespeareView.printResult(shakespeareModel.getResultList());
+        else
+            shakespeareView.printMessage(View.WORD_NOT_FOUND);
+        searchWord();
     }
 
     private int checkInput (BufferedReader br) {
